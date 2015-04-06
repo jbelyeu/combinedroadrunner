@@ -1,65 +1,137 @@
+<!DOCTYPE html>
+
 <html>
 <head>
-  <title>Weather News</title>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-  <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
-  <script src="javascripts/angularApp.js"></script>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>RoadRunner.net</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<link href='/images/minilogo.ico' rel='icon' type='image/ico' />
+	<link href="/stylesheets/font-awesome.css" rel="stylesheet" />
+	<link href="/stylesheets/main.css" rel="stylesheet"/>
+	<link href="/stylesheets/_bootmetro.css" rel="stylesheet"/>
+	<link href="/stylesheets/bootmetro.css" rel="stylesheet"/>
+	<link href="/stylesheets/bootmetro-icons.css" rel="stylesheet"/>
+	<link href="/stylesheets/bootmetro-responsive.css" rel="stylesheet"/>
+	<link href="/stylesheets/registration.css" rel="stylesheet"/>
+	<link href="/stylesheets/rrweb.css" rel="stylesheet"/>
+
+	<script src="/javascripts/modernizr-2.6.2-respond-1.1.0.js"></script>
+	<script src="/javascripts/angular.js"></script>
+	<script src="/javascripts/angular-resource.js"></script>
+	<script src="/javascripts/app.js"></script>
 
 </head>
-<body ng-app="weatherNews">
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-  <ui-view></ui-view>
-</div>
-<script type="text/ng-template" id="/home.html">
-<div class="page-header"> 
-  <h1>Weather News</h1>
-</div>
 
-  <form ng-submit="addPost()" style = "margin-top30px;">
-    <input type="text" ng-model="formContent"></input>
-    <button type="submit">Post</button>
-  </form>
-  <div>
-    {{test}}
-  </div>
-  <div ng-repeat="post in posts | orderBy: '-upvotes'">
-    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
-    {{post.title}} - upvotes: {{post.upvotes}}
-    <a href="#/posts/{{posts.indexOf(post)}}">Comments</a>
-  </div>
-</script>
-<script type="text/ng-template" id="/posts.html">
-    <div class="page-header">
-      <h3>
-          {{post.title}}
-      </h3>
-    </div>
+<style>
+	.navTextFontsize
+	{
+		font-size: 16px;
+	}
+	.footerText
+	{
+		color: white;
+		font-size: 22px;
+	}
+	#TableHead th
+	{
+		width: 183px;
+	}
+</style>
 
-    <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-      <span class="glyphicon glyphicon-thumbs-up"
-        ng-click="incrementUpvotes(comment)"></span>
-      {{comment.upvotes}}
-      <span style="font-size:20px; margin-left:10px;">
-       {{comment.body}}
-      </span>
-    </div>
-    <form ng-submit="addComment()"
-      style="margin-top:30px;">
-      <h3>Add a new comment</h3>
+<body ng-app="rrWebsiteApp" ng-controller="AppController" style="overflow-x: hidden; overflow-y: auto;">
+	<div class="row-fluid" id='header' style="height: 120px;">
+		<div class='logo' style="margin-left: 10%; margin-right: 10%;"></div>
+		<div class='pull-right' style="margin-left: 10%; margin-right: 10%;">
+			<ul id="menu" ng-controller="NavbarCtrl" class="nav nav-pills ng-scope" style="margin-top: 0px; 
+				text-align: right; margin-right: -15px;">
+				<li ng-class="{active: routeIs('/')}">
+				<a href="/" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
+					Home</a>
+					<!-- 
+					{{'WEBSITE_HOME}}</a> 
+					-->
+				</li>
+				<li ng-class="{active: routeIs('/Login')}">
+					<a href="/Login" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
+					Login</a>
+					<!-- 
+						{{'WEBSITE_LOGIN'}}</a>
+					-->
+				</li>
+				<li ng-class="{active: routeIs('/AboutUs')}">
+					<a href="/AboutUs" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
+					AboutUs</a>
+					<!-- 
+						{{'WEBSITE_ABOUTUS'}}</a>
+					-->
+				</li>
+				<li ng-class="{active: routeIs('/Contact')}">
+					<a href="/Contact" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
+					Contact</a>
+					<!-- 
+						{{'WEBSITE_CONTACT'}}</a>
+					-->
+				</li>
+			</ul>
+		</div>
+	</div>
 
-     <div class="form-group">
-        <input type="text"
-        class="form-control"
-        placeholder="Comment"
-        ng-model="body"></input>
-      </div>
-      <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+	<div class='row-fluid' style="width: 90%; margin-left: 10%; margin-right:10%; margin-top: 10px;"> <!-- might need to add an ng-model -->
+		<div class='pull-left BG-Color' style="width: 312px; height: 560px;">
+			
+		</div>
+		<div class='pull-left RSS_feed BG-Color' style="width: 780px; height: 560px;"> <!-- style="width: 780px; height: 560px;" class='container' -->
+			<!--
+			<div id="thumbnail" class="html5gallery pull-left" data-skin="horizontal" data-showcarousel="false" data-bgimage="bg.png" style="width: 760px; height: 560px;z-index: 1;">
+				 <a href="/images/temp_image.jpeg" data-link="https://placeit.net/" data-linktarget="_blank">
+					 <img src="/images/temp_image.jpeg" width="760px" height="560px" alt="" /></a>
+			 </div>
+			 -->
+		</div>
+	</div>
 
-  </script>
-</div>
-</div>
+	<footer id="footer" class="ng-scope">
+		<div style="width: 1100px; margin-left=10%; margin-top: 20px; margin-bottom: 1%;">
+			<table border=0>
+				<tr id="TableHead" style="color: white; font-size: 22px;">
+					<th><span></span></th>
+					<th><span></span></th>
+					<th><span></span></th>
+					<th><span></span></th>
+					<th><span></span></th>
+					<th><span></span></th>
+					<th style="color: while; font-size: 22px; font-weight: 400px; width: 180px;">
+						<span class="pull-left ng-binding">RoadRunner.net</span>
+					</th>
+				</tr>
+				<tr>
+					<td><span></span></td>
+					<td><span></span></td>
+					<td><span></span></td>
+					<td><span></span></td>
+					<td><span></span></td>
+					<td><span></span></td>
+					<td class="pull-right" width="180px">
+						<table class="pull-left" width='180px'>
+							<tbody>
+							<tr>
+								<td class='pull-left'>Hayden Smith</td>
+							</tr>
+							<tr>
+								<td class='pull-left'>Jonathan Belyeu</td>
+							</tr>
+							<tr>
+								<td class='pull-left'>Artem Golotin</td>
+							</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</footer>
+
 </body>
 </html>
