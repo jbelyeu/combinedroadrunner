@@ -19,6 +19,17 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 
 }])
 
+.factory('mainFactory', ['$http', function($http)
+{
+	var route = {};
+
+	route.save = function(route)
+	{
+		return "nothing";
+	}
+	return route;
+}])
+
 .config
 ([
 	'$stateProvider',
@@ -65,6 +76,30 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
                 password: $scope.password
             };
 			
+			loginFactory.signup(newUser);
+		};
+	}
+])
+
+.controller('MainCtrl', 
+[
+	'$scope',
+	'$stateParams',
+	'mainFactory', 
+	function ($scope, $stateParams, loginFactory)
+	{
+		$scope.saveRoute = function()
+		{
+			if ($scope.route == undefined)
+			{
+				return;
+			}
+			var newUser = { 
+                route: $scope.route,
+                username: $scope.username,
+                password: $scope.password
+            };
+			//need to enforce uniqueness for username
 			loginFactory.signup(newUser);
 		};
 	}
