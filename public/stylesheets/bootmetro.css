@@ -9342,9 +9342,9 @@ ul#wizard-steps {
 
 .logo {
     background-image: url('../images/mainLogo.png');
-    background-size: contain;
+    background-size: 378px 81px;
     background-repeat: no-repeat;
-    height: 58px;
+    height: 81px;
 }
 
 .night {
