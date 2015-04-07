@@ -304,27 +304,31 @@
 	<div class='row-fluid' style="width: 90%; margin-left: 10%; margin-right:10%; margin-top: 25px;"> <!-- might need to add an ng-model -->
 		<div class='pull-left BG-Color' style="width: 312px; height: 560px;">
 			
+
+
+
+
+    			<button id="calc_route">Reset Route</button>
+    			<button id='cl_pts'>Clear Points</button>
+    			<p>Total Distance: <span id="total" style='color:white;'></span><br>
+     			<select id='dist_sys' onchange="computeTotalDistance();">
+        			<option value='metric'>Metric</option>
+        			<option value='imperial'>Imperial</option>
+      			</select>
+    			</p>
+    			<div id="search-panel">
+      				<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    			</div>
+
+
+
+
+
 		</div>
 		<div id='map-canvas' class='pull-left RSS_feed BG-Color' style="width: 780px; height: 560px;"> <!-- style="width: 780px; height: 560px;" class='container' -->
 		
 		</div>
 	</div>
-
-	<!--Hayden added for interacting with map-->
-    	<button id="calc_route">Reset Route</button>
-    	<button id='cl_pts'>Clear Points</button>
-    	<p>Total Distance: <span id="total"></span><br>
-     	<select id='dist_sys' onchange="computeTotalDistance();">
-        	<option value='metric'>Metric</option>
-        	<option value='imperial'>Imperial</option>
-      	</select>
-    	</p>
-    	<div id="search-panel">
-      		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    	</div>
-
-
-
 
 	<footer id="footer" class="ng-scope">
 		<div style="width: 1100px; margin-left=10%; margin-top: 20px; margin-bottom: 1%;">
