@@ -9427,16 +9427,17 @@ ul#wizard-steps {
     cursor: pointer;
 }
 
-.ioc-databeat {
-    background-position: center center;
-    background-image: url('../images/databeat.png');
-    background-repeat: no-repeat;
-    height: 38px;
-    width: 38px;
-    float: left;
-    margin-right: 10px;
-    cursor: pointer;
-}
+.ioc-signup {
+	background-position: center center;
+	background-image: url('../images/signup.png');
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+	float: left;
+	margin-right: 5px;
+	cursor: pointer;
+} 
+
 
 .ioc-rss {
     background-position: center center;

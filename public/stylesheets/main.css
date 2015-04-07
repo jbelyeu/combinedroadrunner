@@ -1,13 +1,7 @@
 .loginheader
 {
-    background: transparent url(../images/logo.png) no-repeat;
-    background-size: contain;
+    background: transparent url(../images/mainLogo.png) no-repeat;
+    background-size: 560px 85px;
+	margin-left: 60px;
     height:85px;
-}
-
-.fbheader
-{
-    background: transparent url(../images/fb_header.png) no-repeat;
-    background-size: contain;
-    height:44px;
 }

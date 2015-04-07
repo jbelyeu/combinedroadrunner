@@ -7,7 +7,7 @@
 	<title>RoadRunner.net</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-	<link href='/images/minilogo.ico' rel='icon' type='image/ico' />
+	<link href='/images/mainLogo.png' rel='icon' type='image/ico' />
 	<link href="/stylesheets/font-awesome.css" rel="stylesheet" />
 	<link href="/stylesheets/main.css" rel="stylesheet"/>
 	<link href="/stylesheets/_bootmetro.css" rel="stylesheet"/>
@@ -21,6 +21,7 @@
 	<script src="/javascripts/angular.js"></script>
 	<script src="/javascripts/angular-resource.js"></script>
 	<script src="/javascripts/app.js"></script>
+    <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
 
 	<!--Hayden added code-->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -262,11 +263,11 @@
 </style>
 
 
-<body ng-app="rrWebsiteApp" ng-controller="AppController" style="overflow-x: hidden; overflow-y: auto;">
+<body ng-app="rrWebsiteApp" style="overflow-x: hidden; overflow-y: auto;">
 	<div class="row-fluid" id='header' style="height: 120px;">
 		<div class='logo' style="margin-left: 10%; margin-right: 10%;"></div>
 		<div class='pull-right' style="margin-left: 10%; margin-right: 10%;">
-			<ul id="menu" ng-controller="NavbarCtrl" class="nav nav-pills ng-scope" style="margin-top: 0px; 
+			<ul id="menu" class="nav nav-pills ng-scope" style="margin-top: 0px; 
 				text-align: right; margin-right: -15px;">
 				<li ng-class="{active: routeIs('/')}">
 				<a href="/" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
@@ -276,8 +277,8 @@
 					-->
 				</li>
 				<li ng-class="{active: routeIs('/Login')}">
-					<a href="/Login" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
-					Login</a>
+					<a href="/Account" target="_self" style="font-size: 18px; margin-left: -20px;" class="ng-binding">
+					Account</a>
 					<!-- 
 						{{'WEBSITE_LOGIN'}}</a>
 					-->

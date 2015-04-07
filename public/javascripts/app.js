@@ -68,4 +68,4 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			loginFactory.signup(newUser);
 		};
 	}
-])
+]);
