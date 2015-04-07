@@ -79,7 +79,6 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			loginFactory.signup(newUser);
 		};
 	}
-<<<<<<< HEAD
 ])
 
 .controller('MainCtrl', 
@@ -104,7 +103,4 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			loginFactory.signup(newUser);
 		};
 	}
-])
-=======
 ]);
->>>>>>> ccac7edd509c1073c52d0257cf53d6e944856eee
