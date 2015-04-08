@@ -232,18 +232,16 @@
 
        			});
 
-				$("#save").click(function() {
+				$("#saveBtn").click(function() {
 				
 					console.log("order");
-
           			var routeData = {
 						route: route,
 						latitude: gps_lat,
-						longitude: gps_lng 
+						longitude: gps_lng					
 					};
-					console.log(routeData);
-					return routeData;
-					//document.getElementById("saveInput").json = routeData;
+					
+					document.getElementById("saveInput").innerHTML = routeData;
 					//console.log(document.getElementById("saveSpan"));
        			});
 
@@ -328,9 +326,9 @@
     			<button id="calc_route">Reset Route</button>
     			<button id='cl_pts'>Clear Points</button>
 
-				<form ng-submit="saveRoute( )">
-					<div id="saveInput" ng-model="route" style="display: none;"></div>
-					<button id='save' type="submit">Save Route</button>
+				<form ng-submit="saveRoute()">
+					<input id="saveInput" ng-model="route" style="display: none;"></input>
+					<button type="submit">Save Route</button>
 				</form>
 
     			<p>Total Distance: <span id="total" style='color:white;'></span><br>

@@ -48,6 +48,12 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			url: '/Login',
 			templateUrl: '/login',
 			controller: 'LoginCtrl'
+		})
+		.state("saveRoute",
+		{
+			url: '/SaveRoute',
+			templateUrl: '/saveRoute',
+			controller: 'MainCtrl'
 		});
 		$urlRouterProvider.otherwise('home');
 	}
@@ -88,19 +94,20 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 	'mainFactory', 
 	function ($scope, $stateParams, loginFactory)
 	{
-		$scope.saveRoute = function()
+		$scope.saveRoute = function(data)
 		{
+			console.log(data);
+			console.log("here");
+			console.log($scope.route);
 			if ($scope.route == undefined)
 			{
 				return;
 			}
 			var newUser = { 
-                route: $scope.route,
-                username: $scope.username,
-                password: $scope.password
+                route: $scope.route
             };
 			//need to enforce uniqueness for username
-			loginFactory.signup(newUser);
+		//	loginFactory.signup(newUser);
 		};
 	}
 ]);
