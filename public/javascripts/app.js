@@ -23,10 +23,23 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 {
 	var route = {};
 
-	route.save = function(route)
+	route.save = function(routeObj)
 	{
-		return "nothing";
+		console.log("trying to send post");
+		return $http.post('/saveRoute', routeObj).success(function(data)
+		{});
 	}
+
+	route.loadRoutes = function(userData)
+	{
+		console.log("trying to call GET");
+//		var url = 'getRoutes/' + userData.username + '/' + userData.password;
+
+		var url = '/getRoutes/' + userData.username + '/' + userData.password;
+		return $http.get(url).success(function(data)
+		{});
+	}
+
 	return route;
 }])
 
@@ -97,16 +110,30 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 		$scope.saveRoute = function(data)
 		{
 			console.log(data);
-			console.log("here");
-			console.log($scope.route);
-			if ($scope.route == undefined)
+			if (data.latitude == undefined ||
+				data.longitude == undefined ||
+				data.username == undefined ||
+				data.password == undefined ||
+				data.route == undefined 
+			)
 			{
+				console.log("failed controller line 107");
 				return;
 			}
-			var newUser = { 
-                route: $scope.route
-            };
-			//need to enforce uniqueness for username
+			var newRoute = data;
+			newRoute.latitude = data.toString();
+			newRoute.longitude = data.toString();
+			loginFactory.save(newRoute);
+
+			var userData = {
+				username: "a",
+				password: 'a'
+			};
+			
+			console.log(loginFactory.loadRoutes(userData));
+
+		
+		//need to enforce uniqueness for username
 		//	loginFactory.signup(newUser);
 		};
 	}

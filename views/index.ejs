@@ -328,7 +328,34 @@
     			<button id="calc_route">Reset Route</button>
     			<button id='cl_pts'>Clear Points</button>
 
-				<form ng-submit="saveRoute( )">
+<!--				<form ng-submit="saveRoute(
+				{
+					route: [
+						{D: -111.656134500000001, K: 40.2454012},
+						{D: -111.656134500000001, K: 40.2454012},
+						{D: -111.656134500000001, K: 40.2454012},
+						{D: -111.656134500000001, K: 40.2454012}
+					],
+					latitude: 40.245,
+					long: -111.649,
+					username: "agolotin",
+					password: "awesomeness"
+				})">-->
+<!-- This emulates the object needed so I can continue working on the back end -->
+
+				<form ng-submit="saveRoute(
+				{
+					username: 'agolotin',
+					password: 'coolness',
+					latitude: 12,
+					longitude: 14,
+					route: [
+						{D: 1, K: 2 },
+						{D: 1, K: 2 },
+						{D: 1, K: 2 },
+						{D: 1, K: 2 }
+					]
+				})">
 					<div id="saveInput" ng-model="route" style="display: none;"></div>
 					<button id='save' type="submit">Save Route</button>
 				</form>
