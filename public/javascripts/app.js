@@ -43,7 +43,8 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 .factory('mainFactory', ['$http', function($http)
 {
 	var route = {
-		routes: []
+		routes: [],
+		data_stuff: 'asdf'
 	};
 
 	route.save = function(routeObj)
@@ -153,7 +154,7 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 	'mainFactory', 
 	function ($scope, $stateParams, loginFactory)
 	{
-		$scope.saveRoute = function(data)
+	/*	$scope.saveRoute = function(data)
 		{
 			console.log(data);
 			if (data.latitude == undefined ||
@@ -187,6 +188,13 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 		
 		//need to enforce uniqueness for username
 		//	loginFactory.signup(newUser);
+		};
+	}*/
+
+		$scope.saveRoute = function ()
+		{
+			console.log("in saveRoute()");
+			console.log($scope.stuff);
 		};
 	}
 ]);

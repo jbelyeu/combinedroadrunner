@@ -123,8 +123,18 @@
                         		console.log("Lat=" + lat + "; Lng=" + lng);
     
                         		route.push(new google.maps.LatLng(lat, lng));
-
+							
+								var routeData = {
+									route: route,
+									latitude: gps_lat,
+									longitude: gps_lng 
+								};
+								
                         		calculateRoute();
+								document.getElementById('in').value = route;
+								console.log("value");
+								console.log(document.getElementById('in').value);
+
                 		} else {
                         		//do something
                 		}   
@@ -234,17 +244,8 @@
 
 				$("#save").click(function() {
 				
-					console.log("order");
 
-          			var routeData = {
-						route: route,
-						latitude: gps_lat,
-						longitude: gps_lng 
-					};
-					console.log(routeData);
-					return routeData;
-					//document.getElementById("saveInput").json = routeData;
-					//console.log(document.getElementById("saveSpan"));
+          			
        			});
 
 
@@ -330,7 +331,8 @@
 
 <!-- This emulates the object needed so I can continue working on the back end -->
 				
-				<form ng-submit="saveRoute(
+
+				<!--<form ng-submit="saveRoute(
 				{
 					routename: 'testroute',
 					username: 'a',
@@ -343,9 +345,14 @@
 						{D: 1, K: 2 },
 						{D: 1, K: 2 }
 					]
-				})">
-					<div id="saveInput" ng-model="route" style="display: none;"></div>
+				})">-->
+				<form ng-submit="saveRoute()"> 
+<!--					<div id="saveInput" ng-model="route" style="display: none;"></div>-->
 					<button id='save' type="submit">Save Route</button>
+				</form>
+				
+				<form id='route_data'style="display: none" >
+					<input id='in' type='text' ng-model="stuff"></input>
 				</form>
 
     			<p>Total Distance: <span id="total" style='color:white;'></span><br>
