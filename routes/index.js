@@ -121,7 +121,7 @@ router.post('/validate', function(req, res, next)
 					else
 					{
 						console.log("invalid user");
-						res.json("Save Failed: User invalid");
+						res.json('Validation Failed: User invalid');
 					}
 				});
 			});

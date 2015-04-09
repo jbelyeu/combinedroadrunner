@@ -26,15 +26,13 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 		console.log(userData);
 		$http.post('/validate/', userData).success(function(data)
 		{
-			console.log("got a response");
-			if (data.indexOf("User invalid"))
-			{
-				//it failed to validate
-				console.log("inside");
+			var errMsg = "\"Validation Failed: User invalid\"";
 
-				alert("we aren't losers");
+			//it failed to validate
+			if (data == errMsg)
+			{
+				alert("Failed to sign in. Double check your username and password");
 			}
-			console.log(data);
 		});		
 	
 	};
