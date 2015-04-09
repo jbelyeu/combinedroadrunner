@@ -25,28 +25,27 @@
 	<script src="/javascripts/app.js"></script>
 	<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
 
-	<script src="/javascripts/app.js"></script>
 </head>
 <body>
 	<div ng-app="rrWebsiteApp" class="ng-scope">
-		<div class="container" ng-controller="loginCtrl">
+		<div class="container" ng-controller="LoginCtrl">
 			<div class="row">
 				<div class="span8 offset2 login_box">
 					<div class="loginheader"></div>
 					<div class="span offset2" style="padding-top: 50px; padding-bottom: 0px; width: 274px;">
 						<form ng-submit="validateUser()">
 							<div class="form-horizontal" style="vertical-align: middle;">
-									<label style="margin-top: 20px; margin-bottom: 0px;" class="ng-binding">Username (Email)</label>
-									<input type="text" style="width: 100%;" id="username" placeholder="Username" ng-model="Username"></input>
+									<label style="margin-top: 20px; margin-bottom: 0px;" class="ng-binding">Username</label>
+									<input type="text" style="width: 100%;" id="username" placeholder="Username" ng-model="username"></input>
 									<label style="margin-top: 10px; margin-bottom: 0px; " class="ng-binding">Password</label>
-									<input type="password" style="width: 100%;" id='password' placeholder="Password" ng-show="showpassword" ng-model="Password"></input>
+									<input type="password" style="width: 100%;" id='password' placeholder="Password"  ng-model="password"></input>
 							</div>
 							<div style="margin-top: 35px">
 								<button class="btn-login-primary btn-block" style="font-style: normal; font-size: 20px;" type="submit">Sign in</button>
 							</div>
 						</form>
 						<div style="margin-top: 30px; margin-left: 95px;">
-							<i class="fa-chevron-circle-up" ng-click="singupClick()" style="cursor: pointer;">Sing up</i>
+							<i class="fa-chevron-circle-up" ng-click="singupClick()" style="cursor: pointer;">Sign up</i>
 						</div>
 					</div>
 				</div>

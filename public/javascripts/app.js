@@ -11,9 +11,29 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 
 	login.signup = function(userData)
 	{
-		return $http.post('/signup/', userData)
-			.success(function(data)
-			{});
+		return $http.post('/signup/', userData).success(function(data)
+		{
+			if (data == "")
+			{
+				//it failed to save
+			}
+		});
+	};
+
+	login.validate = function(userData)
+	{
+		console.log("in validate factory");
+		console.log(userData);
+		return $http.post('/validate/', userData).success(function(data)
+		{
+			if (data == "Error: User invalid")
+			{
+				//it failed to validate
+				console.log(data);
+			}
+			console.log(data);
+		});		
+	
 	};
 	return login;
 
@@ -21,7 +41,9 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 
 .factory('mainFactory', ['$http', function($http)
 {
-	var route = {};
+	var route = {
+		routes: []
+	};
 
 	route.save = function(routeObj)
 	{
@@ -30,14 +52,15 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 		{});
 	}
 
-	route.loadRoutes = function(userData)
+	route.loadRoutes = function(userData, callbackFun)
 	{
 		console.log("trying to call GET");
-//		var url = 'getRoutes/' + userData.username + '/' + userData.password;
 
 		var url = '/getRoutes/' + userData.username + '/' + userData.password;
-		return $http.get(url).success(function(data)
-		{});
+		$http.get(url).success(function(data)
+		{
+			callbackFun(data);
+		});
 	}
 
 	return route;
@@ -79,6 +102,24 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 	'loginFactory', 
 	function ($scope, $stateParams, loginFactory)
 	{
+		$scope.validateUser = function()
+		{
+			console.log("entering validate function");
+			console.log($scope);
+			if (typeof $scope.username === 'undefined' ||
+				typeof $scope.password === 'undefined')
+			{
+				return;
+			}
+			var user = {
+				username: $scope.username,
+				password: $scope.password
+			}
+
+			console.log(user);
+			loginFactory.validate(user);
+		};
+		
 		$scope.addNewUser = function()
 		{
 			if (typeof $scope.firstname  === 'undefined' || 
@@ -112,6 +153,7 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			console.log(data);
 			if (data.latitude == undefined ||
 				data.longitude == undefined ||
+				data.routename == undefined ||
 				data.username == undefined ||
 				data.password == undefined ||
 				data.route == undefined 
@@ -123,14 +165,19 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			var newRoute = data;
 			newRoute.latitude = data.toString();
 			newRoute.longitude = data.toString();
-			loginFactory.save(newRoute);
-
-			var userData = {
-				username: "a",
-				password: 'a'
-			};
+//			loginFactory.save(newRoute);i
 			
-			console.log(loginFactory.loadRoutes(userData));
+			var userData = {
+				username: data.username,
+				password: data.password
+			};
+
+			loginFactory.loadRoutes(userData, function(data)
+			{
+				console.log("in ctrl, routes found: " );
+				$scope.routes = data;
+				console.log($scope.routes);
+			});
 
 		
 		//need to enforce uniqueness for username

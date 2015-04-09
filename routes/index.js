@@ -18,7 +18,7 @@ router.get('/Account', function(req, res, next)
 	res.render('login', { title: 'Express' });
 });
 
-//get all routes for a given username
+//get all running routes for a given username
 router.get('/getRoutes/:username/:pass', function(req, res, next) 
 {
 	console.log("stuff");
@@ -38,17 +38,22 @@ router.get('/getRoutes/:username/:pass', function(req, res, next)
 			
 			users.find({password: pass, username: user}, function (err, items)
 			{
+				console.log("pass: " + pass);
 				if (err) {throw err;}
 				items.toArray(function (err, itemArray)
 				{
 					if (err) {throw err;}
 					if (itemArray.length > 0) //means the user is valid
 					{
+						console.log("user valid");
+						console.log(itemArray);
 						Route.find({username: user}, function (err, routes)
 						{
 							if (err) {throw err;}
+							console.log("routes found: ");
+							console.log(routes);
 							res.json(routes);
-						}
+						});
 					}
 					else
 					{
@@ -78,6 +83,55 @@ router.post('/signup', function(req, res, next)
 	});
 });
 
+//GET validate user
+router.post('/validate', function(req, res, next) 
+{
+	console.log("in users validate POST method");
+	console.log(req.body);
+	var pass = req.body.password;
+	var uname = req.body.username;
+	
+	var mongoClient = require("mongodb").MongoClient;
+	mongoClient.connect('mongodb://localhost/roadrunner', function(err, db)
+	{
+		if (err)
+		{
+			throw err;
+		}
+		
+		db.collection("users", function (err, users)
+		{
+			console.log("in call to db: " + pass);
+			if (err) {throw err;}
+			
+			users.find({password: pass, username: uname}, function (err, items)
+			{
+				if (err) {throw err;}
+				items.toArray(function (err, itemArray)
+				{
+					console.log("validating user");
+					console.log(itemArray);
+
+					if (err) {throw err;}
+					if (itemArray.length > 0)
+					{
+						console.log("valid user");
+						res.json("Valid user " + uname);
+					}
+					else
+					{
+						console.log("invalid user");
+						res.json("Save Failed: User invalid");
+					}
+				});
+			});
+		});
+	});
+
+
+});
+
+//POST save route
 router.post('/saveRoute', function(req, res, next)
 {
 
@@ -98,11 +152,10 @@ router.post('/saveRoute', function(req, res, next)
 		
 		db.collection("users", function (err, users)
 		{
-			console.log("in call to db" + pass);
+			console.log("in call to db: " + pass);
 			if (err) {throw err;}
-//			var validUser = users.find({password: pass, username: body.username});
-			//hacked this for testing
-			users.find({password: 'a', username: 'a'}, function (err, items)
+			
+			users.find({password: pass, username: body.username}, function (err, items)
 			{
 				if (err) {throw err;}
 				items.toArray(function (err, itemArray)
@@ -110,6 +163,7 @@ router.post('/saveRoute', function(req, res, next)
 					if (err) {throw err;}
 					if (itemArray.length > 0)
 					{
+						console.log("valid user");
 						var route = new Route(req.body);
 						console.log('route');
 						route.create(function (err, route)
@@ -125,6 +179,7 @@ router.post('/saveRoute', function(req, res, next)
 					}
 					else
 					{
+						console.log("invalid user");
 						res.json("Save Failed: User invalid");
 					}
 				});

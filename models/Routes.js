@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var RouteSchema = new mongoose.Schema
 ({
+	routename: String,
 	username: String,
 	latitude: String, //do we trust double for this?
 	longitude: String,
