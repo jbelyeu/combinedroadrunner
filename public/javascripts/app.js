@@ -20,16 +20,19 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 		});
 	};
 
-	login.validate = function(userData)
+	login.validate = function(userData, callbackFun)
 	{
 		console.log("in validate factory");
 		console.log(userData);
-		return $http.post('/validate/', userData).success(function(data)
+		$http.post('/validate/', userData).success(function(data)
 		{
-			if (data == "Error: User invalid")
+			console.log("got a response");
+			if (data.indexOf("User invalid"))
 			{
 				//it failed to validate
-				console.log(data);
+				console.log("inside");
+
+				alert("we aren't losers");
 			}
 			console.log(data);
 		});		
@@ -117,7 +120,11 @@ angular.module('rrWebsiteApp',['ui.router', 'ngResource'])
 			}
 
 			console.log(user);
-			loginFactory.validate(user);
+			loginFactory.validate(user, function()
+			{
+				console.log("loserer");
+				alert("Loser");
+			});
 		};
 		
 		$scope.addNewUser = function()
